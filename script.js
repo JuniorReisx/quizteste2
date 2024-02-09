@@ -2,81 +2,83 @@ const perguntas = [
   {
     pergunta: "Como que todo código de HTML começa?",
     alternativas: ["a) <head></head>", "b) <html></html>", "c) <!DOCTYPE html>", "d) <start></start>"],
-    indiceRespostaCorreta: 2
+    iRespostaCorreta: 2
   },
   {
     pergunta: "Qual tag que define o título de uma página em HTML?",
     alternativas: ["a) <page></page>", "b) <name></name>", "c) <title></title>", "d) <p></p>"],
-    indiceRespostaCorreta: 2
+    iRespostaCorreta: 2
   },
   {
     pergunta: "Qual tag define um parágrafo em HTML?",
-    alternativas: ["a) <p></p>", "b) <text></text>", "c) <h1></h1>", "d) <p></p>"],
-    indiceRespostaCorreta: 0
+    alternativas: ["a) <p></p>", "b) <text></text>", "c) <h1></h1>", "d) <page></page>"],
+    iRespostaCorreta: 0
   }
-];
+]
 
-const containerQuiz = document.getElementById("quiz-container");
-const elementoPergunta = document.getElementById("question");
-const elementoAlternativas = document.getElementById("alternatives");
+const divQuiz = document.getElementById("quiz-container")
+const divPergunta = document.getElementById("question")
+const divAlternativas = document.getElementById("alternatives")
 
-let indicePerguntaAtual = 0;
-let pontuacaoUsuario = 0;
+let iPerguntaAtual = 0
+let pontuacao = 0
 
-function exibirPergunta() {
-  const perguntaAtual = perguntas[indicePerguntaAtual];
-  elementoPergunta.textContent = perguntaAtual.pergunta;
+function mostraPergunta() {
+  const perguntaAtual = perguntas[iPerguntaAtual]
+  divPergunta.innerHTML = ""
+  divPergunta.textContent = perguntaAtual.pergunta
+  divAlternativas.innerHTML = ""
 
-  elementoAlternativas.innerHTML = "";
-  perguntaAtual.alternativas.forEach((alternativa, indice) => {
-    const botao = document.createElement("button");
-    botao.textContent = alternativa;
-    botao.addEventListener("click", () => verificarResposta(indice));
-    elementoAlternativas.appendChild(botao);
-  });
+//ou perguntaAtual.alternativas.length
+  for (let i = 0; i < 4; i++) {
+    const alternativa = perguntaAtual.alternativas[i]
+    const botao = document.createElement("button")
+    botao.textContent = alternativa
+    botao.addEventListener("click", () => verificar(i))
+    divAlternativas.appendChild(botao);
+  }
+  
 }
 
-function verificarResposta(indiceSelecionado) {
-  const perguntaAtual = perguntas[indicePerguntaAtual];
+function verificar(botaoApertado) {
+  const perguntaAtual = perguntas[iPerguntaAtual]
 
-  if (indiceSelecionado === perguntaAtual.indiceRespostaCorreta) {
-    pontuacaoUsuario++;
-    alert("Você acertou!");
+  if (botaoApertado == perguntaAtual.iRespostaCorreta) {
+    pontuacao = pontuacao + 1
+    alert("Tá sabendo muito, você acertou.")
   } else {
-    alert("Você errou!");
-    exibirBotaoReiniciar();
+    alert("Vixi você errou, reinicie o quiz e tente de novo")
+   const botaoReiniciar = document.createElement("button")
+  botaoReiniciar.textContent = "Reiniciar Quiz"
+  botaoReiniciar.addEventListener("click", reiniciarQuiz)
+  divAlternativas.appendChild(botaoReiniciar)
+  botaoReiniciar.style.backgroundColor= "red"
     return;  
   }
 
-  indicePerguntaAtual++;
-
-  if (indicePerguntaAtual < perguntas.length) {
-    exibirPergunta();
+  iPerguntaAtual++;
+//ou perguntas.length
+  if (iPerguntaAtual < 3) {
+    mostraPergunta()
   } else {
-    exibirResultado();
+    exibirResultado()
   }
 }
 
-function exibirBotaoReiniciar() {
-  const botaoReiniciar = document.createElement("button");
-  botaoReiniciar.textContent = "Reiniciar Quiz";
-  botaoReiniciar.addEventListener("click", reiniciarQuiz);
-  elementoAlternativas.appendChild(botaoReiniciar);
-  botaoReiniciar.style.backgroundColor= "red"
-}
 
 function reiniciarQuiz() {
-  indicePerguntaAtual = 0;
-  pontuacaoUsuario = 0;
-  elementoAlternativas.innerHTML = "";
-  exibirPergunta();
+  iPerguntaAtual = 0
+  pontuacao = 0
+  divPergunta.innerHTML = ""
+  divAlternativas.innerHTML = ""
+  mostraPergunta()
 }
 
 function exibirResultado() {
-  containerQuiz.innerHTML = `<h2>Quiz concluído!</h2><p>Sua pontuação: ${pontuacaoUsuario} de ${perguntas.length}</p>`;
+  divQuiz.innerHTML = `<h2>Quiz concluído!</h2><p>Sua pontuação: ${pontuacao} de ${perguntas.length}</p>`;
 }
 
-exibirPergunta();
+mostraPergunta()
 
 
 
