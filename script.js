@@ -62,6 +62,7 @@ function exibirBotaoReiniciar() {
   botaoReiniciar.textContent = "Reiniciar Quiz";
   botaoReiniciar.addEventListener("click", reiniciarQuiz);
   elementoAlternativas.appendChild(botaoReiniciar);
+  botaoReiniciar.style.backgroundColor= "red"
 }
 
 function reiniciarQuiz() {
