@@ -15,10 +15,14 @@ main{
   align-items: center;
 }
 
+h1{
+  color: aliceblue; text-align: center;
+}
+
 body {
     
     height: 100%;
-    background-image: url(./back.png);
+    background-image: url(./img/back.png);
     background-size: cover;
   font-family: Arial, sans-serif;
   margin: 20px;
@@ -37,9 +41,19 @@ body {
 }
 @media screen and (max-width: 500px) {
   
+button {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+}
+  
 #quiz-container {
- 
-  height: 700px;
+ display: flex;
+ flex-direction: column;
+  height: 600px;
+
+  width: 300px;
+  font-size: 10px;
    
  }
 }

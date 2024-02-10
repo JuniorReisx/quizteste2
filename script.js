@@ -27,10 +27,11 @@ function mostraPergunta() {
   const perguntaAtual = perguntas[iPerguntaAtual]
   divPergunta.innerHTML = ""
   divPergunta.textContent = perguntaAtual.pergunta
+  
   divAlternativas.innerHTML = ""
 
 //ou perguntaAtual.alternativas.length
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i <= 3; i++) {
     const alternativa = perguntaAtual.alternativas[i]
     const botao = document.createElement("button")
     botao.textContent = alternativa
@@ -50,6 +51,7 @@ function verificar(botaoApertado) {
     alert("Vixi você errou, reinicie o quiz e tente de novo")
    const botaoReiniciar = document.createElement("button")
   botaoReiniciar.textContent = "Reiniciar Quiz"
+  
   botaoReiniciar.addEventListener("click", reiniciarQuiz)
   divAlternativas.appendChild(botaoReiniciar)
   botaoReiniciar.style.backgroundColor= "red"
