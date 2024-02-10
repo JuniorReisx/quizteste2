@@ -47,18 +47,22 @@ function verificar(botaoApertado) {
   if (botaoApertado == perguntaAtual.iRespostaCorreta) {
     pontuacao = pontuacao + 1
     alert("Tá sabendo muito, você acertou.")
+    
   } else {
     alert("Vixi você errou, reinicie o quiz e tente de novo")
+    
+    
     if (!document.getElementById("btnReiniciar")) {
       const botaoReiniciar = document.createElement("button");
       botaoReiniciar.id = "btnReiniciar";
       botaoReiniciar.textContent = "Reiniciar Quiz";
       botaoReiniciar.addEventListener("click", reiniciarQuiz);
       divAlternativas.appendChild(botaoReiniciar);
-      botaoReiniciar.style.backgroundColor = "red";
+  
     }
     return;  
   }
+  
 
   iPerguntaAtual++;
 //ou perguntas.length
